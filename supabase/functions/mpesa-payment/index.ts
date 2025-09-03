@@ -36,7 +36,8 @@ serve(async (req) => {
     // Step 1: Get OAuth token
     const authString = btoa(`${consumerKey}:${consumerSecret}`);
     
-    const tokenResponse = await fetch('https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials', {
+    // Use production URLs for live environment
+    const tokenResponse = await fetch('https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials', {
       method: 'GET',
       headers: {
         'Authorization': `Basic ${authString}`,
@@ -44,7 +45,9 @@ serve(async (req) => {
     });
 
     if (!tokenResponse.ok) {
-      throw new Error(`Token request failed: ${tokenResponse.status}`);
+      const errorText = await tokenResponse.text();
+      console.error('Token request failed:', errorText);
+      throw new Error(`Token request failed: ${tokenResponse.status} - ${errorText}`);
     }
 
     const tokenData = await tokenResponse.json();
@@ -73,8 +76,8 @@ serve(async (req) => {
 
     console.log('STK Push payload:', { ...stkPushPayload, Password: '[HIDDEN]' });
 
-    // Step 4: Send STK Push request
-    const stkResponse = await fetch('https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', {
+    // Step 4: Send STK Push request - Use production URL
+    const stkResponse = await fetch('https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${accessToken}`,

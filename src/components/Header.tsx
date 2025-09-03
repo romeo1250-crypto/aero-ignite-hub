@@ -26,10 +26,11 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-hero">
-            <span className="text-lg font-bold text-white">A</span>
-          </div>
-          <span className="text-xl font-bold text-primary">AeroLabz</span>
+          <img 
+            src="/lovable-uploads/7cec7251-9e51-4419-a2cb-d1de051a2124.png" 
+            alt="AeroLabz Logo" 
+            className="h-8 w-auto"
+          />
         </Link>
 
         {/* Desktop Navigation */}
