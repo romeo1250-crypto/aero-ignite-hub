@@ -1,0 +1,307 @@
+import { useState } from "react";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AdminSidebar } from "@/components/AdminSidebar";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  BarChart3, 
+  Users, 
+  ShoppingCart, 
+  DollarSign,
+  Plus,
+  Edit,
+  Trash2,
+  Search,
+  Filter,
+  MoreHorizontal
+} from "lucide-react";
+
+const Admin = () => {
+  const [selectedView, setSelectedView] = useState("dashboard");
+
+  const stats = [
+    {
+      title: "Total Revenue",
+      value: "KSH 2,450,000",
+      change: "+12.5%",
+      icon: DollarSign,
+      color: "text-green-600"
+    },
+    {
+      title: "Active Students",
+      value: "1,248",
+      change: "+8.2%", 
+      icon: Users,
+      color: "text-blue-600"
+    },
+    {
+      title: "Orders This Month",
+      value: "89",
+      change: "+23.1%",
+      icon: ShoppingCart,
+      color: "text-purple-600"
+    },
+    {
+      title: "Programs Running",
+      value: "24",
+      change: "+4.1%",
+      icon: BarChart3,
+      color: "text-orange-600"
+    }
+  ];
+
+  const recentOrders = [
+    { id: "ORD-001", customer: "Nairobi Technical Institute", product: "Flight Simulation Package", amount: "KSH 45,000", status: "Completed" },
+    { id: "ORD-002", customer: "Kenyatta University", product: "STEM Workshop Series", amount: "KSH 78,000", status: "In Progress" },
+    { id: "ORD-003", customer: "Alliance High School", product: "VR Training Setup", amount: "KSH 120,000", status: "Pending" },
+    { id: "ORD-004", customer: "Starehe Boys Centre", product: "Drone Racing Kit", amount: "KSH 32,000", status: "Completed" }
+  ];
+
+  const products = [
+    { id: 1, name: "Professional Drone DJI Mavic 3", category: "Drones", price: "KSH 180,000", stock: 12, status: "Active" },
+    { id: 2, name: "Flight Simulation Software License", category: "Software", price: "KSH 25,000", stock: 50, status: "Active" },
+    { id: 3, name: "STEM Workshop Kit", category: "Educational", price: "KSH 15,000", stock: 8, status: "Low Stock" },
+    { id: 4, name: "VR Headset - Education Package", category: "Hardware", price: "KSH 45,000", stock: 0, status: "Out of Stock" }
+  ];
+
+  const blogPosts = [
+    { id: 1, title: "The Future of STEM Education in Kenya", author: "Dr. Sarah Kimani", date: "2024-01-15", status: "Published" },
+    { id: 2, title: "How Flight Simulation Enhances Learning", author: "James Mwangi", date: "2024-01-10", status: "Draft" },
+    { id: 3, title: "Student Success Stories from AeroLabz", author: "Grace Wanjiku", date: "2024-01-08", status: "Published" }
+  ];
+
+  const DashboardView = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <Button className="bg-gradient-hero">
+          <Plus className="mr-2 h-4 w-4" />
+          New Order
+        </Button>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((stat, index) => (
+          <Card key={index}>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+              <stat.icon className={`h-4 w-4 ${stat.color}`} />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stat.value}</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="text-green-600">{stat.change}</span> from last month
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Recent Orders */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Recent Orders</CardTitle>
+          <CardDescription>Latest customer orders and their status</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {recentOrders.map((order, index) => (
+              <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                <div className="flex items-center space-x-4">
+                  <div>
+                    <p className="font-medium">{order.customer}</p>
+                    <p className="text-sm text-muted-foreground">{order.id} • {order.product}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <span className="font-medium">{order.amount}</span>
+                  <Badge variant={order.status === "Completed" ? "default" : order.status === "In Progress" ? "secondary" : "outline"}>
+                    {order.status}
+                  </Badge>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  const ProductsView = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Products</h1>
+        <Button className="bg-gradient-hero">
+          <Plus className="mr-2 h-4 w-4" />
+          Add Product
+        </Button>
+      </div>
+
+      <div className="flex items-center space-x-4">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input placeholder="Search products..." className="pl-10" />
+        </div>
+        <Button variant="outline">
+          <Filter className="mr-2 h-4 w-4" />
+          Filter
+        </Button>
+      </div>
+
+      <Card>
+        <CardContent className="p-0">
+          <div className="space-y-1">
+            {products.map((product, index) => (
+              <div key={index} className="flex items-center justify-between p-4 border-b last:border-b-0">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center text-white font-bold">
+                    {product.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-medium">{product.name}</p>
+                    <p className="text-sm text-muted-foreground">{product.category}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-6">
+                  <span className="font-medium">{product.price}</span>
+                  <span className="text-sm text-muted-foreground">Stock: {product.stock}</span>
+                  <Badge variant={
+                    product.status === "Active" ? "default" : 
+                    product.status === "Low Stock" ? "secondary" : "destructive"
+                  }>
+                    {product.status}
+                  </Badge>
+                  <Button variant="ghost" size="icon">
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  const ContentView = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Content Management</h1>
+        <Button className="bg-gradient-hero">
+          <Plus className="mr-2 h-4 w-4" />
+          New Post
+        </Button>
+      </div>
+
+      <Tabs defaultValue="blog" className="space-y-6">
+        <TabsList>
+          <TabsTrigger value="blog">Blog Posts</TabsTrigger>
+          <TabsTrigger value="pages">Pages</TabsTrigger>
+          <TabsTrigger value="media">Media</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="blog" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Blog Posts</CardTitle>
+              <CardDescription>Manage your blog content and articles</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {blogPosts.map((post, index) => (
+                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                      <p className="font-medium">{post.title}</p>
+                      <p className="text-sm text-muted-foreground">By {post.author} • {post.date}</p>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <Badge variant={post.status === "Published" ? "default" : "secondary"}>
+                        {post.status}
+                      </Badge>
+                      <Button variant="ghost" size="icon">
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button variant="ghost" size="icon">
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="pages" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Website Pages</CardTitle>
+              <CardDescription>Manage your website pages and content</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {["Home", "About", "Services", "Portfolio", "Team", "Contact"].map((page, index) => (
+                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                      <p className="font-medium">{page} Page</p>
+                      <p className="text-sm text-muted-foreground">Last updated: 2024-01-15</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button variant="outline" size="sm">
+                        <Edit className="mr-2 h-4 w-4" />
+                        Edit
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+
+  const renderView = () => {
+    switch (selectedView) {
+      case "dashboard":
+        return <DashboardView />;
+      case "products":
+        return <ProductsView />;
+      case "content":
+        return <ContentView />;
+      default:
+        return <DashboardView />;
+    }
+  };
+
+  return (
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full bg-background">
+        <AdminSidebar selectedView={selectedView} onViewChange={setSelectedView} />
+        <main className="flex-1 overflow-hidden">
+          <header className="h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center px-6">
+            <SidebarTrigger />
+            <div className="ml-auto flex items-center space-x-4">
+              <span className="text-sm text-muted-foreground">Welcome back, Admin</span>
+              <div className="w-8 h-8 bg-gradient-hero rounded-full flex items-center justify-center text-white font-semibold">
+                A
+              </div>
+            </div>
+          </header>
+          <div className="p-6">
+            {renderView()}
+          </div>
+        </main>
+      </div>
+    </SidebarProvider>
+  );
+};
+
+export default Admin;
