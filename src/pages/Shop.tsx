@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CheckoutModal from "@/components/CheckoutModal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -32,6 +33,9 @@ interface Product {
 const Shop = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedSku, setSelectedSku] = useState<any>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -63,11 +67,15 @@ const Shop = () => {
   };
 
   const handleBuyNow = (product: Product, sku: any) => {
-    // For now, just show a toast - checkout modal to be implemented
-    toast({
-      title: "Buy Now Clicked",
-      description: `${product.name} - KES ${sku.price_base.toLocaleString()}`,
-    });
+    setSelectedProduct(product);
+    setSelectedSku(sku);
+    setCheckoutModalOpen(true);
+  };
+
+  const handleCloseCheckout = () => {
+    setCheckoutModalOpen(false);
+    setSelectedProduct(null);
+    setSelectedSku(null);
   };
 
   const getProductImage = (media: any) => {
@@ -211,6 +219,16 @@ const Shop = () => {
       </section>
 
       <Footer />
+      
+      {/* Checkout Modal */}
+      {selectedProduct && selectedSku && (
+        <CheckoutModal
+          product={selectedProduct}
+          sku={selectedSku}
+          isOpen={checkoutModalOpen}
+          onClose={handleCloseCheckout}
+        />
+      )}
     </div>
   );
 };
