@@ -195,16 +195,70 @@ const Admin = () => {
         <h1 className="text-3xl font-bold">Content Management</h1>
         <Button className="bg-gradient-hero">
           <Plus className="mr-2 h-4 w-4" />
-          New Post
+          New Content
         </Button>
       </div>
 
-      <Tabs defaultValue="blog" className="space-y-6">
+      <Tabs defaultValue="pages" className="space-y-6">
         <TabsList>
+          <TabsTrigger value="pages">Page Contents</TabsTrigger>
           <TabsTrigger value="blog">Blog Posts</TabsTrigger>
-          <TabsTrigger value="pages">Pages</TabsTrigger>
           <TabsTrigger value="media">Media</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="pages" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Page Content Management</CardTitle>
+              <CardDescription>Edit and manage content for your website pages</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { name: "Home", description: "Hero section, services overview, testimonials", sections: ["Hero", "Services", "Stats", "CTA"] },
+                  { name: "About", description: "Company story, mission, values, team intro", sections: ["Story", "Mission", "Values", "Timeline"] },
+                  { name: "Services", description: "STEM programs, workshops, packages", sections: ["Programs", "Workshops", "Packages", "Benefits"] },
+                  { name: "Portfolio", description: "Projects showcase, case studies, impact", sections: ["Projects", "Case Studies", "Results", "Gallery"] },
+                  { name: "Team", description: "Team members, expertise, backgrounds", sections: ["Leadership", "Educators", "Specialists", "Advisors"] },
+                  { name: "Contact", description: "Contact forms, office info, FAQ", sections: ["Form", "Info", "FAQ", "Map"] }
+                ].map((page, index) => (
+                  <Card key={index} className="border-2 hover:border-primary/20 transition-colors">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">{page.name} Page</CardTitle>
+                        <Badge variant="outline">Live</Badge>
+                      </div>
+                      <CardDescription>{page.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div>
+                          <Label className="text-sm font-medium">Page Sections:</Label>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {page.sections.map((section, idx) => (
+                              <Badge key={idx} variant="secondary" className="text-xs">
+                                {section}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" className="flex-1">
+                            <Edit className="mr-2 h-3 w-3" />
+                            Edit Content
+                          </Button>
+                          <Button variant="ghost" size="sm">
+                            Preview
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         <TabsContent value="blog" className="space-y-4">
           <Card>
@@ -238,25 +292,19 @@ const Admin = () => {
           </Card>
         </TabsContent>
 
-        <TabsContent value="pages" className="space-y-4">
+        <TabsContent value="media" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Website Pages</CardTitle>
-              <CardDescription>Manage your website pages and content</CardDescription>
+              <CardTitle>Media Library</CardTitle>
+              <CardDescription>Manage images, videos, and other media files</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {["Home", "About", "Services", "Portfolio", "Team", "Contact"].map((page, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                    <div>
-                      <p className="font-medium">{page} Page</p>
-                      <p className="text-sm text-muted-foreground">Last updated: 2024-01-15</p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Button variant="outline" size="sm">
-                        <Edit className="mr-2 h-4 w-4" />
-                        Edit
-                      </Button>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+                  <div key={item} className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center border-2 border-dashed border-muted-foreground/20">
+                    <div className="text-center">
+                      <div className="text-2xl mb-1">📷</div>
+                      <p className="text-xs text-muted-foreground">Media {item}</p>
                     </div>
                   </div>
                 ))}

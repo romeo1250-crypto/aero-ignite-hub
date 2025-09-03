@@ -14,6 +14,7 @@ const Header = () => {
     { name: "Services", href: "/services" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Team", href: "/team" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -53,9 +54,11 @@ const Header = () => {
           <Button variant="ghost" size="icon">
             <ShoppingCart className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="icon">
-            <User className="h-4 w-4" />
-          </Button>
+          <Link to="/auth">
+            <Button variant="outline" size="sm">
+              Admin Login
+            </Button>
+          </Link>
           
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
