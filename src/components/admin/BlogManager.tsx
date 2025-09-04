@@ -83,12 +83,22 @@ export function BlogManager() {
 
   const handleSubmit = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
       
-      if (!user) {
+      if (userError || !user) {
         toast({
-          title: "Error",
+          title: "Authentication Error",
           description: "You must be logged in to create blog posts",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Validate required fields
+      if (!formData.title || !formData.content) {
+        toast({
+          title: "Validation Error",
+          description: "Title and content are required",
           variant: "destructive"
         });
         return;
@@ -97,10 +107,20 @@ export function BlogManager() {
       if (editingPost) {
         const { error } = await supabase
           .from('blogs')
-          .update(formData)
+          .update({
+            title: formData.title,
+            slug: formData.slug,
+            excerpt: formData.excerpt,
+            content: formData.content,
+            featured_image: formData.featured_image,
+            published: formData.published
+          })
           .eq('id', editingPost.id);
 
-        if (error) throw error;
+        if (error) {
+          console.error('Update error:', error);
+          throw error;
+        }
         toast({
           title: "Success",
           description: "Blog post updated successfully"
@@ -108,9 +128,20 @@ export function BlogManager() {
       } else {
         const { error } = await supabase
           .from('blogs')
-          .insert([{ ...formData, author_id: user.id }]);
+          .insert([{ 
+            title: formData.title,
+            slug: formData.slug,
+            excerpt: formData.excerpt,
+            content: formData.content,
+            featured_image: formData.featured_image,
+            published: formData.published,
+            author_id: user.id 
+          }]);
 
-        if (error) throw error;
+        if (error) {
+          console.error('Insert error:', error);
+          throw error;
+        }
         toast({
           title: "Success",
           description: "Blog post created successfully"
@@ -120,10 +151,11 @@ export function BlogManager() {
       fetchPosts();
       resetForm();
       setIsDialogOpen(false);
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Blog save error:', error);
       toast({
         title: "Error",
-        description: "Failed to save blog post",
+        description: error.message || "Failed to save blog post",
         variant: "destructive"
       });
     }
