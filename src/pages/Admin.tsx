@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { BlogManager } from "@/components/admin/BlogManager";
+import { ProductManager } from "@/components/admin/ProductManager";
 import { 
   BarChart3, 
   Users, 
@@ -133,61 +135,7 @@ const Admin = () => {
     </div>
   );
 
-  const ProductsView = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Products</h1>
-        <Button className="bg-gradient-hero">
-          <Plus className="mr-2 h-4 w-4" />
-          Add Product
-        </Button>
-      </div>
-
-      <div className="flex items-center space-x-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search products..." className="pl-10" />
-        </div>
-        <Button variant="outline">
-          <Filter className="mr-2 h-4 w-4" />
-          Filter
-        </Button>
-      </div>
-
-      <Card>
-        <CardContent className="p-0">
-          <div className="space-y-1">
-            {products.map((product, index) => (
-              <div key={index} className="flex items-center justify-between p-4 border-b last:border-b-0">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center text-white font-bold">
-                    {product.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-medium">{product.name}</p>
-                    <p className="text-sm text-muted-foreground">{product.category}</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-6">
-                  <span className="font-medium">{product.price}</span>
-                  <span className="text-sm text-muted-foreground">Stock: {product.stock}</span>
-                  <Badge variant={
-                    product.status === "Active" ? "default" : 
-                    product.status === "Low Stock" ? "secondary" : "destructive"
-                  }>
-                    {product.status}
-                  </Badge>
-                  <Button variant="ghost" size="icon">
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  const ProductsView = () => <ProductManager />;
 
   const ContentView = () => (
     <div className="space-y-6">
@@ -261,35 +209,7 @@ const Admin = () => {
         </TabsContent>
 
         <TabsContent value="blog" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Blog Posts</CardTitle>
-              <CardDescription>Manage your blog content and articles</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {blogPosts.map((post, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                    <div>
-                      <p className="font-medium">{post.title}</p>
-                      <p className="text-sm text-muted-foreground">By {post.author} • {post.date}</p>
-                    </div>
-                    <div className="flex items-center space-x-4">
-                      <Badge variant={post.status === "Published" ? "default" : "secondary"}>
-                        {post.status}
-                      </Badge>
-                      <Button variant="ghost" size="icon">
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="icon">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <BlogManager />
         </TabsContent>
 
         <TabsContent value="media" className="space-y-4">
@@ -324,6 +244,8 @@ const Admin = () => {
         return <ProductsView />;
       case "content":
         return <ContentView />;
+      case "blog":
+        return <BlogManager />;
       default:
         return <DashboardView />;
     }

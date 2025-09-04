@@ -52,6 +52,11 @@ const items = [
     icon: FileText,
   },
   {
+    title: "Blog",
+    url: "blog",
+    icon: FileText,
+  },
+  {
     title: "Analytics",
     url: "analytics",
     icon: BarChart3,
