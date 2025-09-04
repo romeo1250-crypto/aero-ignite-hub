@@ -92,6 +92,169 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Our Goals Section */}
+      <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
+        <div className="container px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+              OUR GOALS
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Our Goals
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-4xl mx-auto mb-12">
+              Our overarching goal at AeroLabz is to empower and inspire the next generation of innovators, 
+              problem-solvers, and leaders in STEM education. Through our programs and initiatives, we aim to 
+              cultivate a culture of curiosity, creativity, and excellence, equipping students with the skills, 
+              knowledge, and confidence they need to thrive in an increasingly complex and interconnected world.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="group hover:shadow-premium transition-all duration-300 hover:-translate-y-2">
+              <CardHeader>
+                <div className="p-4 bg-gradient-hero rounded-lg w-fit mb-4 group-hover:scale-110 transition-transform">
+                  <Zap className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-xl">Foster Innovation</CardTitle>
+                <CardDescription>
+                  Encourage creativity and innovative thinking among students by providing hands-on experiences 
+                  and exposure to cutting-edge technologies in STEM fields.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="group hover:shadow-premium transition-all duration-300 hover:-translate-y-2">
+              <CardHeader>
+                <div className="p-4 bg-gradient-hero rounded-lg w-fit mb-4 group-hover:scale-110 transition-transform">
+                  <Users className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-xl">Promote Equity and Inclusion</CardTitle>
+                <CardDescription>
+                  Ensure that all students, regardless of background or circumstances, have equal access to 
+                  high-quality STEM education, fostering diversity and inclusion in the STEM workforce of the future.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="group hover:shadow-premium transition-all duration-300 hover:-translate-y-2">
+              <CardHeader>
+                <div className="p-4 bg-gradient-hero rounded-lg w-fit mb-4 group-hover:scale-110 transition-transform">
+                  <TrendingUp className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-xl">Drive Impactful Learning Outcomes</CardTitle>
+                <CardDescription>
+                  Measure and improve the effectiveness of our programs by continuously evaluating student learning 
+                  outcomes, engagement levels, and overall program impact, ensuring that AeroLabz remains at the 
+                  forefront of STEM education excellence.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Values Section */}
+      <section className="py-24">
+        <div className="container px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+              OUR VALUES
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Values
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="hover:shadow-premium transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 bg-accent rounded-lg">
+                    <Zap className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-accent">Innovation</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We are committed to fostering a culture of creativity, experimentation, and continuous 
+                      improvement, where new ideas are welcomed, explored, and implemented to drive positive change.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-premium transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 bg-accent rounded-lg">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-accent">Equity</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We believe that all individuals deserve equal access to educational opportunities and resources, 
+                      regardless of their background or circumstances.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-premium transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 bg-accent rounded-lg">
+                    <Award className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-accent">Excellence</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We are committed to upholding the highest standards of quality, professionalism, and integrity 
+                      in curriculum development, program delivery, and student support.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-premium transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 bg-accent rounded-lg">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-accent">Collaboration</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We believe in the power of partnerships and teamwork to leverage collective expertise and 
+                      resources for greater impact.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-premium transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 bg-accent rounded-lg">
+                    <CheckCircle className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-accent">Integrity</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We hold ourselves to the highest ethical standards and strive to earn the trust and confidence 
+                      of our students, partners, and communities through our actions and deeds.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
       <section className="py-24">
         <div className="container px-4">
