@@ -83,6 +83,17 @@ export function BlogManager() {
 
   const handleSubmit = async () => {
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        toast({
+          title: "Error",
+          description: "You must be logged in to create blog posts",
+          variant: "destructive"
+        });
+        return;
+      }
+
       if (editingPost) {
         const { error } = await supabase
           .from('blogs')
@@ -97,7 +108,7 @@ export function BlogManager() {
       } else {
         const { error } = await supabase
           .from('blogs')
-          .insert([formData]);
+          .insert([{ ...formData, author_id: user.id }]);
 
         if (error) throw error;
         toast({
