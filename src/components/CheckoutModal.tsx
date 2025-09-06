@@ -140,13 +140,6 @@ const CheckoutModal = ({ product, sku, isOpen, onClose }: CheckoutModalProps) =>
       if (itemError) throw itemError;
 
       // Initiate Mpesa STK Push
-      console.log('Initiating M-Pesa payment with data:', {
-        phone: formatPhoneNumber(formData.phone),
-        amount: sku.price_base,
-        order_id: order.id,
-        description: `Payment for ${product.name}`
-      });
-
       const { data: paymentData, error: paymentError } = await supabase.functions.invoke('mpesa-payment', {
         body: {
           phone: formatPhoneNumber(formData.phone),
@@ -156,33 +149,26 @@ const CheckoutModal = ({ product, sku, isOpen, onClose }: CheckoutModalProps) =>
         }
       });
 
-      console.log('M-Pesa payment response:', { paymentData, paymentError });
+      if (paymentError) throw paymentError;
 
-      if (paymentError) {
-        console.error('M-Pesa function error:', paymentError);
-        throw new Error(paymentError.message || 'Failed to connect to payment service');
-      }
-
-      if (paymentData && paymentData.success) {
+      if (paymentData.success) {
         toast({
           title: "Payment Initiated",
-          description: "Please check your phone for the M-Pesa payment prompt. You have 2 minutes to complete the payment.",
+          description: "Please check your phone for the M-Pesa payment prompt",
         });
         
         // Check payment status after a delay
         setTimeout(() => {
           checkPaymentStatus(order.id);
-        }, 15000); // Increased delay to 15 seconds
+        }, 10000);
         
         onClose();
       } else {
-        const errorMessage = paymentData?.message || 'Payment initiation failed';
-        console.error('M-Pesa payment failed:', errorMessage);
-        throw new Error(errorMessage);
+        throw new Error(paymentData.message || 'Payment initiation failed');
       }
 
-    } catch (error: any) {
-      console.error('Payment error details:', error);
+    } catch (error) {
+      console.error('Payment error:', error);
       toast({
         title: "Payment Failed",
         description: error.message || "Failed to process payment. Please try again.",
