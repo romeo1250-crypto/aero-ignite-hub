@@ -19,7 +19,13 @@ serve(async (req) => {
   }
 
   try {
-    const { phone, amount, order_id, description }: MpesaRequest = await req.json();
+    console.log('M-Pesa function called with method:', req.method);
+    console.log('Request headers:', Object.fromEntries(req.headers.entries()));
+    
+    const requestBody = await req.json();
+    console.log('Request body received:', requestBody);
+    
+    const { phone, amount, order_id, description }: MpesaRequest = requestBody;
 
     console.log('Processing M-Pesa payment request:', { phone, amount, order_id, description });
 
@@ -29,8 +35,22 @@ serve(async (req) => {
     const shortcode = Deno.env.get('MPESA_SHORTCODE');
     const passkey = Deno.env.get('MPESA_PASSKEY');
 
+    console.log('Checking M-Pesa credentials:', {
+      hasConsumerKey: !!consumerKey,
+      hasConsumerSecret: !!consumerSecret,
+      hasShortcode: !!shortcode,
+      hasPasskey: !!passkey
+    });
+
     if (!consumerKey || !consumerSecret || !shortcode || !passkey) {
-      throw new Error('M-Pesa credentials not configured');
+      const missingCreds = [];
+      if (!consumerKey) missingCreds.push('MPESA_CONSUMER_KEY');
+      if (!consumerSecret) missingCreds.push('MPESA_CONSUMER_SECRET');
+      if (!shortcode) missingCreds.push('MPESA_SHORTCODE');
+      if (!passkey) missingCreds.push('MPESA_PASSKEY');
+      
+      console.error('Missing M-Pesa credentials:', missingCreds);
+      throw new Error(`M-Pesa credentials not configured: ${missingCreds.join(', ')}`);
     }
 
     // Step 1: Get OAuth token
