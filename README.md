@@ -2,9 +2,7 @@
 
 A modern e-commerce platform specializing in drone technology, built with React, TypeScript, and Supabase.
 
-## 🚀 Live Demo
 
-**URL**: https://lovable.dev/projects/e4e812cf-47be-4e0f-b4e2-df1276910df1
 
 ## 📋 Table of Contents
 
@@ -198,12 +196,6 @@ The platform integrates with Safaricom's M-Pesa API for mobile money payments:
 ### Access
 Admin features are protected by role-based authentication. Admin users can access the full management interface at `/admin`.
 
-## 🚀 Deployment
-
-### Lovable Platform
-The easiest way to deploy is through Lovable:
-1. Open your [Lovable Project](https://lovable.dev/projects/e4e812cf-47be-4e0f-b4e2-df1276910df1)
-2. Click **Share** → **Publish**
 
 ### Custom Domain
 Connect your own domain through Project Settings → Domains (requires paid plan).
@@ -223,17 +215,8 @@ Connect your own domain through Project Settings → Domains (requires paid plan
 - Maintain test coverage
 - Follow the existing code style
 
-## 📚 Additional Resources
 
-- [Lovable Documentation](https://docs.lovable.dev/)
-- [Supabase Documentation](https://supabase.com/docs)
-- [M-Pesa API Documentation](https://developer.safaricom.co.ke/)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
 ## 📄 License
 
 This project is proprietary and confidential. All rights reserved.
-
----
-
-**Built with ❤️ using Lovable, React, and Supabase**
