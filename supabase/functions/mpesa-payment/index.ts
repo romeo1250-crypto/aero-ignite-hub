@@ -29,17 +29,23 @@ serve(async (req) => {
 
     console.log('Processing M-Pesa payment request:', { phone, amount, order_id, description });
 
-    // Get M-Pesa credentials from environment
+    // Get M-Pesa credentials and URLs from environment
     const consumerKey = Deno.env.get('MPESA_CONSUMER_KEY');
     const consumerSecret = Deno.env.get('MPESA_CONSUMER_SECRET');
     const shortcode = Deno.env.get('MPESA_SHORTCODE');
     const passkey = Deno.env.get('MPESA_PASSKEY');
+    const accessTokenUrl = Deno.env.get('MPESA_ACCESS_TOKEN_URL') || 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+    const stkPushUrl = Deno.env.get('MPESA_STK_PUSH_URL') || 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+    const callbackUrl = Deno.env.get('MPESA_CALLBACK_URL') || `https://xgxgbnfljshiusflawcp.supabase.co/functions/v1/mpesa-callback`;
 
-    console.log('Checking M-Pesa credentials:', {
+    console.log('Checking M-Pesa credentials and URLs:', {
       hasConsumerKey: !!consumerKey,
       hasConsumerSecret: !!consumerSecret,
       hasShortcode: !!shortcode,
-      hasPasskey: !!passkey
+      hasPasskey: !!passkey,
+      accessTokenUrl,
+      stkPushUrl,
+      callbackUrl
     });
 
     if (!consumerKey || !consumerSecret || !shortcode || !passkey) {
@@ -56,8 +62,8 @@ serve(async (req) => {
     // Step 1: Get OAuth token
     const authString = btoa(`${consumerKey}:${consumerSecret}`);
     
-    // Use production URLs for live environment
-    const tokenResponse = await fetch('https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials', {
+    console.log('Requesting access token from:', accessTokenUrl);
+    const tokenResponse = await fetch(accessTokenUrl, {
       method: 'GET',
       headers: {
         'Authorization': `Basic ${authString}`,
@@ -89,15 +95,16 @@ serve(async (req) => {
       PartyA: phone,
       PartyB: shortcode,
       PhoneNumber: phone,
-      CallBackURL: `https://xgxgbnfljshiusflawcp.supabase.co/functions/v1/mpesa-callback`,
+      CallBackURL: callbackUrl,
       AccountReference: order_id,
       TransactionDesc: description || "Payment for order"
     };
 
     console.log('STK Push payload:', { ...stkPushPayload, Password: '[HIDDEN]' });
 
-    // Step 4: Send STK Push request - Use production URL
-    const stkResponse = await fetch('https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest', {
+    // Step 4: Send STK Push request
+    console.log('Sending STK Push to:', stkPushUrl);
+    const stkResponse = await fetch(stkPushUrl, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${accessToken}`,

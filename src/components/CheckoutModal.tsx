@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CreditCard } from "lucide-react";
+import { MpesaPaymentModule } from "@/lib/mpesa";
 
 interface CheckoutModalProps {
   product: any;
@@ -139,32 +140,55 @@ const CheckoutModal = ({ product, sku, isOpen, onClose }: CheckoutModalProps) =>
 
       if (itemError) throw itemError;
 
-      // Initiate Mpesa STK Push
-      const { data: paymentData, error: paymentError } = await supabase.functions.invoke('mpesa-payment', {
-        body: {
-          phone: formatPhoneNumber(formData.phone),
-          amount: sku.price_base,
-          order_id: order.id,
-          description: `Payment for ${product.name}`
-        }
+      // Initiate M-Pesa payment using the new payment module
+      const paymentResult = await MpesaPaymentModule.initiatePayment({
+        phone: formData.phone,
+        amount: sku.price_base,
+        order_id: order.id,
+        description: `Payment for ${product.name}`
       });
 
-      if (paymentError) throw paymentError;
-
-      if (paymentData.success) {
+      if (paymentResult.success) {
         toast({
           title: "Payment Initiated",
           description: "Please check your phone for the M-Pesa payment prompt",
         });
         
-        // Check payment status after a delay
-        setTimeout(() => {
-          checkPaymentStatus(order.id);
-        }, 10000);
+        // Start polling payment status with better UX
+        if (paymentResult.checkout_request_id) {
+          MpesaPaymentModule.pollPaymentStatus(
+            paymentResult.checkout_request_id,
+            (status) => {
+              console.log('Payment status update:', status);
+              if (status === 'completed') {
+                toast({
+                  title: "Payment Successful",
+                  description: "Your order has been confirmed!",
+                });
+                onClose();
+              } else if (status === 'failed' || status === 'cancelled') {
+                toast({
+                  title: "Payment Failed",
+                  description: "Payment was not completed. Please try again.",
+                  variant: "destructive",
+                });
+              }
+            }
+          ).then((finalResult) => {
+            console.log('Final payment result:', finalResult);
+            if (finalResult.status === 'timeout') {
+              toast({
+                title: "Payment Status Unknown",
+                description: "Payment status check timed out. Please contact support if payment was deducted.",
+                variant: "destructive",
+              });
+            }
+          });
+        }
         
         onClose();
       } else {
-        throw new Error(paymentData.message || 'Payment initiation failed');
+        throw new Error(paymentResult.message || 'Payment initiation failed');
       }
 
     } catch (error) {
@@ -179,22 +203,7 @@ const CheckoutModal = ({ product, sku, isOpen, onClose }: CheckoutModalProps) =>
     }
   };
 
-  const checkPaymentStatus = async (orderId: string) => {
-    try {
-      const { data, error } = await supabase.functions.invoke('check-payment-status', {
-        body: { order_id: orderId }
-      });
-
-      if (!error && data.success) {
-        toast({
-          title: "Payment Successful",
-          description: "Your order has been confirmed!",
-        });
-      }
-    } catch (error) {
-      console.error('Error checking payment status:', error);
-    }
-  };
+  // Removed the old checkPaymentStatus function as it's now handled by the MpesaPaymentModule
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
