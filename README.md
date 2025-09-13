@@ -1,73 +1,239 @@
-# Welcome to your Lovable project
+# AeroLabz - Advanced Drone Solutions Platform
 
-## Project info
+A modern e-commerce platform specializing in drone technology, built with React, TypeScript, and Supabase.
+
+## 🚀 Live Demo
 
 **URL**: https://lovable.dev/projects/e4e812cf-47be-4e0f-b4e2-df1276910df1
 
-## How can I edit this code?
+## 📋 Table of Contents
 
-There are several ways of editing your application.
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Backend Architecture](#backend-architecture)
+- [Payment Integration](#payment-integration)
+- [Admin Panel](#admin-panel)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e4e812cf-47be-4e0f-b4e2-df1276910df1) and start prompting.
+### 🛒 E-Commerce Platform
+- **Product Catalog**: Complete drone product showcase with detailed specifications
+- **Shopping Cart**: Persistent cart functionality for authenticated and guest users
+- **Checkout System**: Comprehensive checkout with address management
+- **Order Management**: Full order lifecycle tracking and management
+- **Inventory Management**: SKU-based inventory with stock tracking
+- **Category Management**: Hierarchical product categorization
 
-Changes made via Lovable will be committed automatically to this repo.
+### 💳 Payment Processing
+- **M-Pesa Integration**: Native mobile money payment support for Kenyan market
+- **Payment Validation**: Automated payment status verification
+- **Order Tracking**: Real-time payment and fulfillment status updates
 
-**Use your preferred IDE**
+### 👥 User Management
+- **Authentication**: Secure user registration and login via Supabase Auth
+- **User Profiles**: Comprehensive user profile management
+- **Address Book**: Multiple shipping and billing address management
+- **Role-Based Access**: Customer and admin role differentiation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 📝 Content Management
+- **Blog System**: Full-featured blog with admin management
+- **Dynamic Content**: SEO-optimized content management
+- **Media Management**: Image and file upload capabilities
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 📊 Analytics & Admin
+- **Admin Dashboard**: Comprehensive admin panel for business management
+- **Analytics Tracking**: User behavior and business metrics tracking
+- **Product Management**: Full CRUD operations for products and SKUs
+- **Order Management**: Order processing and fulfillment tracking
 
-Follow these steps:
+### 🎨 User Experience
+- **Responsive Design**: Mobile-first, responsive design across all devices
+- **Modern UI**: Beautiful, accessible interface built with shadcn/ui
+- **Dark/Light Mode**: Theme switching capability
+- **SEO Optimized**: Search engine optimized pages and content
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🛠 Technology Stack
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Frontend
+- **React 18** - Modern React with hooks and context
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Beautiful, accessible UI components
+- **React Router** - Client-side routing
+- **TanStack Query** - Server state management
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Backend
+- **Supabase** - Backend-as-a-Service platform
+- **PostgreSQL** - Robust relational database
+- **Row Level Security (RLS)** - Database-level security policies
+- **Edge Functions** - Serverless functions for custom logic
+- **Real-time Subscriptions** - Live data updates
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### Payment Integration
+- **M-Pesa API** - Mobile money payment processing
+- **Safaricom STK Push** - Direct mobile payment initiation
+
+### Development Tools
+- **ESLint** - Code linting and formatting
+- **Git** - Version control
+- **GitHub** - Code repository and collaboration
+
+## 📁 Project Structure
+
+```
+src/
+├── components/           # Reusable UI components
+│   ├── ui/              # shadcn/ui components
+│   ├── admin/           # Admin-specific components
+│   └── chatbot/         # Customer support chat
+├── pages/               # Route components
+│   ├── Home.tsx         # Landing page
+│   ├── Shop.tsx         # Product catalog
+│   ├── Auth.tsx         # Authentication
+│   ├── Admin.tsx        # Admin dashboard
+│   └── ...             # Other pages
+├── hooks/               # Custom React hooks
+├── lib/                 # Utility functions
+├── integrations/        # External service integrations
+│   └── supabase/        # Supabase client and types
+└── assets/              # Static assets
+
+supabase/
+├── functions/           # Edge functions
+│   ├── mpesa-payment/   # M-Pesa payment processing
+│   ├── mpesa-callback/  # Payment callback handling
+│   └── check-payment-status/ # Payment verification
+└── config.toml          # Supabase configuration
 ```
 
-**Edit a file directly in GitHub**
+## 🚀 Getting Started
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Prerequisites
+- Node.js 18+ and npm
+- Git
 
-**Use GitHub Codespaces**
+### Installation
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. **Clone the repository**
+   ```bash
+   git clone <YOUR_GIT_URL>
+   cd <YOUR_PROJECT_NAME>
+   ```
 
-## What technologies are used for this project?
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-This project is built with:
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+4. **Open in browser**
+   Navigate to `http://localhost:5173`
 
-## How can I deploy this project?
+### Development Workflow
 
-Simply open [Lovable](https://lovable.dev/projects/e4e812cf-47be-4e0f-b4e2-df1276910df1) and click on Share -> Publish.
+- **Local Development**: Use `npm run dev` for hot-reload development
+- **Building**: Use `npm run build` for production builds
+- **Linting**: Use `npm run lint` to check code quality
 
-## Can I connect a custom domain to my Lovable project?
+## 🗄 Backend Architecture
 
-Yes, you can!
+### Database Schema
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+#### Core Tables
+- **products**: Product catalog with specifications and media
+- **skus**: Stock Keeping Units with pricing and inventory
+- **categories**: Hierarchical product categorization
+- **orders**: Customer order records
+- **order_items**: Individual items within orders
+- **cart_items**: Shopping cart persistence
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+#### User Management
+- **profiles**: Extended user information beyond auth
+- **addresses**: Customer shipping and billing addresses
+
+#### Content & Analytics
+- **blogs**: Blog posts and content management
+- **analytics_events**: User behavior tracking
+- **mpesa_transactions**: Payment transaction records
+
+### Security Features
+- **Row Level Security (RLS)**: Database-level access control
+- **Role-based Permissions**: Admin vs customer access levels
+- **Secure API Endpoints**: Protected edge functions
+- **Input Validation**: Comprehensive data validation
+
+## 💳 Payment Integration
+
+### M-Pesa Integration
+The platform integrates with Safaricom's M-Pesa API for mobile money payments:
+
+- **STK Push**: Automated payment prompts to customer phones
+- **Callback Handling**: Secure payment status notifications
+- **Status Verification**: Real-time payment confirmation
+- **Transaction Logging**: Comprehensive payment audit trail
+
+### Edge Functions
+- `mpesa-payment`: Initiates STK push payments
+- `mpesa-callback`: Handles payment status callbacks
+- `check-payment-status`: Verifies payment completion
+
+## 👨‍💼 Admin Panel
+
+### Features
+- **Product Management**: Add, edit, and manage drone products
+- **Order Processing**: View and process customer orders
+- **Blog Management**: Create and publish blog content
+- **User Management**: View customer profiles and activity
+- **Analytics Dashboard**: Business metrics and insights
+
+### Access
+Admin features are protected by role-based authentication. Admin users can access the full management interface at `/admin`.
+
+## 🚀 Deployment
+
+### Lovable Platform
+The easiest way to deploy is through Lovable:
+1. Open your [Lovable Project](https://lovable.dev/projects/e4e812cf-47be-4e0f-b4e2-df1276910df1)
+2. Click **Share** → **Publish**
+
+### Custom Domain
+Connect your own domain through Project Settings → Domains (requires paid plan).
+
+## 🤝 Contributing
+
+### Development Setup
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Make your changes and test thoroughly
+4. Commit with descriptive messages
+5. Push to your fork and create a pull request
+
+### Coding Standards
+- Follow TypeScript best practices
+- Use semantic commit messages
+- Maintain test coverage
+- Follow the existing code style
+
+## 📚 Additional Resources
+
+- [Lovable Documentation](https://docs.lovable.dev/)
+- [Supabase Documentation](https://supabase.com/docs)
+- [M-Pesa API Documentation](https://developer.safaricom.co.ke/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+
+## 📄 License
+
+This project is proprietary and confidential. All rights reserved.
+
+---
+
+**Built with ❤️ using Lovable, React, and Supabase**
