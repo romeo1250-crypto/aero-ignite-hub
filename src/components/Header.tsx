@@ -27,7 +27,7 @@ const Header = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <img 
-            src="/lovable-uploads/604cab43-2aef-4a82-88ac-3f20d66e50f9.png" 
+            src="/uploads/604cab43-2aef-4a82-88ac-3f20d66e50f9.png" 
             alt="AeroLabz Logo" 
             className="h-8 w-auto"
           />
@@ -40,7 +40,7 @@ const Header = () => {
               key={item.name}
               to={item.href}
               className={`text-sm font-medium transition-smooth hover:text-primary ${
-                isActive(item.href) ? "text-primary" : "text-muted-foreground"
+                isActive(item.href) ? "text-primary" : "text-white"
               }`}
             >
               {item.name}
@@ -77,7 +77,7 @@ const Header = () => {
                     to={item.href}
                     onClick={() => setIsOpen(false)}
                     className={`text-lg font-medium transition-smooth hover:text-primary ${
-                      isActive(item.href) ? "text-primary" : "text-muted-foreground"
+                      isActive(item.href) ? "text-primary" : "text-white"
                     }`}
                   >
                     {item.name}

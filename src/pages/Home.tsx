@@ -106,7 +106,7 @@ const Home = () => {
                   </div>
                 ))}
               </div>
-              <Button variant="hero" size="lg" className="group">
+              <Button href="/about" variant="hero" size="lg" className="group">
                 Learn More About Us
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -228,7 +228,7 @@ const Home = () => {
                   <p className="text-muted-foreground">
                     Pioneering Excellence in Cutting-Edge Aeronautical Innovations
                   </p>
-                  <Button variant="accent" size="lg" className="w-full">
+                  <Button href="/contact" variant="accent" size="lg" className="w-full">
                     Get Started Today
                   </Button>
                 </div>

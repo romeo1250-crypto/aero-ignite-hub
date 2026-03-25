@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <img 
-                src="/lovable-uploads/604cab43-2aef-4a82-88ac-3f20d66e50f9.png" 
+                src="/uploads/604cab43-2aef-4a82-88ac-3f20d66e50f9.png" 
                 alt="AeroLabz Logo" 
                 className="h-8 w-auto"
               />
@@ -104,7 +104,7 @@ const Footer = () => {
 
         <div className="border-t mt-12 pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 AeroLabz. All rights reserved. Elevating STEM education to new heights.
+            © 2026 AeroLabz. All rights reserved. Elevating STEM education to new heights.
           </p>
         </div>
       </div>

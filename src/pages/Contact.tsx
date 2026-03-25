@@ -97,13 +97,13 @@ const Contact = () => {
               <div className="text-sm text-muted-foreground">Students Reached</div>
             </div>
             <div className="text-center p-6 rounded-2xl bg-background/50 backdrop-blur border border-primary/10">
-              <Award className="h-8 w-8 text-secondary mx-auto mb-3" />
-              <div className="text-2xl font-bold text-secondary">50+</div>
+              <Award className="h-8 w-8 text-primary mx-auto mb-3" />
+              <div className="text-2xl font-bold text-primary">50+</div>
               <div className="text-sm text-muted-foreground">Schools Partnered</div>
             </div>
             <div className="text-center p-6 rounded-2xl bg-background/50 backdrop-blur border border-primary/10">
-              <Lightbulb className="h-8 w-8 text-accent mx-auto mb-3" />
-              <div className="text-2xl font-bold text-accent">100+</div>
+              <Lightbulb className="h-8 w-8 text-primary mx-auto mb-3" />
+              <div className="text-2xl font-bold text-primary">100+</div>
               <div className="text-sm text-muted-foreground">Programs Delivered</div>
             </div>
           </div>
