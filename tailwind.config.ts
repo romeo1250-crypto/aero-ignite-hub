@@ -27,7 +27,7 @@ export default {
 				primary: {
 					DEFAULT: 'var(--primary)',
 					foreground: 'var(--primary-foreground)',
-					glow: 'hsl(var(--primary-glow))'
+					glow: 'var(--primary-glow)'
 				},
 				secondary: {
 					DEFAULT: 'var(--secondary)',
@@ -36,7 +36,7 @@ export default {
 				accent: {
 					DEFAULT: 'var(--accent)',
 					foreground: 'var(--accent-foreground)',
-					glow: 'hsl(var(--accent-glow))'
+					glow: 'var(--accent-glow)'
 				},
 				destructive: {
 					DEFAULT: 'var(--destructive)',
