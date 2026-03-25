@@ -4,7 +4,7 @@ A modern e-commerce platform specializing in drone technology, built with React,
 
 
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Technology Stack](#technology-stack)
@@ -16,9 +16,9 @@ A modern e-commerce platform specializing in drone technology, built with React,
 - [Deployment](#deployment)
 - [Contributing](#contributing)
 
-## ✨ Features
+##  Features
 
-### 🛒 E-Commerce Platform
+###  E-Commerce Platform
 - **Product Catalog**: Complete drone product showcase with detailed specifications
 - **Shopping Cart**: Persistent cart functionality for authenticated and guest users
 - **Checkout System**: Comprehensive checkout with address management
@@ -26,35 +26,35 @@ A modern e-commerce platform specializing in drone technology, built with React,
 - **Inventory Management**: SKU-based inventory with stock tracking
 - **Category Management**: Hierarchical product categorization
 
-### 💳 Payment Processing
+###  Payment Processing
 - **M-Pesa Integration**: Native mobile money payment support for Kenyan market
 - **Payment Validation**: Automated payment status verification
 - **Order Tracking**: Real-time payment and fulfillment status updates
 
-### 👥 User Management
+###  User Management
 - **Authentication**: Secure user registration and login via Supabase Auth
 - **User Profiles**: Comprehensive user profile management
 - **Address Book**: Multiple shipping and billing address management
 - **Role-Based Access**: Customer and admin role differentiation
 
-### 📝 Content Management
+###  Content Management
 - **Blog System**: Full-featured blog with admin management
 - **Dynamic Content**: SEO-optimized content management
 - **Media Management**: Image and file upload capabilities
 
-### 📊 Analytics & Admin
+###  Analytics & Admin
 - **Admin Dashboard**: Comprehensive admin panel for business management
 - **Analytics Tracking**: User behavior and business metrics tracking
 - **Product Management**: Full CRUD operations for products and SKUs
 - **Order Management**: Order processing and fulfillment tracking
 
-### 🎨 User Experience
+###  User Experience
 - **Responsive Design**: Mobile-first, responsive design across all devices
 - **Modern UI**: Beautiful, accessible interface built with shadcn/ui
 - **Dark/Light Mode**: Theme switching capability
 - **SEO Optimized**: Search engine optimized pages and content
 
-## 🛠 Technology Stack
+##  Technology Stack
 
 ### Frontend
 - **React 18** - Modern React with hooks and context
@@ -81,7 +81,7 @@ A modern e-commerce platform specializing in drone technology, built with React,
 - **Git** - Version control
 - **GitHub** - Code repository and collaboration
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -109,7 +109,7 @@ supabase/
 └── config.toml          # Supabase configuration
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js 18+ and npm
@@ -169,7 +169,7 @@ supabase/
 - **Secure API Endpoints**: Protected edge functions
 - **Input Validation**: Comprehensive data validation
 
-## 💳 Payment Integration
+##  Payment Integration
 
 ### M-Pesa Integration
 The platform integrates with Safaricom's M-Pesa API for mobile money payments:
@@ -184,7 +184,7 @@ The platform integrates with Safaricom's M-Pesa API for mobile money payments:
 - `mpesa-callback`: Handles payment status callbacks
 - `check-payment-status`: Verifies payment completion
 
-## 👨‍💼 Admin Panel
+##  Admin Panel
 
 ### Features
 - **Product Management**: Add, edit, and manage drone products
@@ -200,7 +200,7 @@ Admin features are protected by role-based authentication. Admin users can acces
 ### Custom Domain
 Connect your own domain through Project Settings → Domains (requires paid plan).
 
-## 🤝 Contributing
+##  Contributing
 
 ### Development Setup
 1. Fork the repository
@@ -217,6 +217,6 @@ Connect your own domain through Project Settings → Domains (requires paid plan
 
 
 
-## 📄 License
+##  License
 
 This project is proprietary and confidential. All rights reserved.
